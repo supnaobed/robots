@@ -1,7 +1,6 @@
-from robot.components.vision import IIRDistanceListener
-from typing import Optional, List
 from robomaster import sensor
-from robomaster import robot
+
+from robot.components.vision import IIRDistanceListener
 
 
 class RobomasterIRDistanceProvider:
