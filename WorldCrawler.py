@@ -32,7 +32,7 @@ class WorldCrawler(IWorldCrawler):
             return
 
         if distance is None:
-            return
+            distance = self._min_distance + 1
 
         if distance < self._min_distance:
             self._robotMapPosition.add_obstacle_on_map(distance)
