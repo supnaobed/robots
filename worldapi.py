@@ -2,7 +2,7 @@ import string
 from abc import ABC, abstractmethod
 from typing import Optional, List
 from robot.components.vision.IIRDistanceListener import IIRDistanceListener
-from data import Command
+from data.Command import Command
 from world import RobotMapPosition
 from data import CommandType
 
@@ -36,7 +36,7 @@ class WorldCrawler(IWorldCrawler):
         if distance is not None:
             self.robotMapPosition.add_obstacle_on_map(distance.real)
             print("robot do some command")
-            command = Command.Command(CommandType.CommandType.MOVE, 1)
+            command = Command(CommandType.CommandType.MOVE, 1)
             self.robotMapPosition.move_robot_on_map(command)
 
 
