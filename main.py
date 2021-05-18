@@ -18,7 +18,9 @@ def setup_robot():
     map_position = RobotMapPosition(DefaultMap())
 
     crawler = WorldCrawler(map_position, controller)
-    distance_provider = RobomasterIRDistanceProvider(crawler, ep_robot.sensor)
+    distance_provider = RobomasterIRDistanceProvider(crawler,
+                                                     ep_robot.sensor,
+                                                     ep_robot.sensor_adaptor)
 
 
 if __name__ == '__main__':

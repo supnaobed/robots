@@ -28,12 +28,14 @@ class WorldCrawler(IWorldCrawler):
         return self._commands
 
     def on_update_distance(self, distance: Optional[float]):
+        print("distance " + str(distance))
         if time.time() - self._command_start_time < self._move_command_time:
             return
 
         if distance is None:
             distance = self._min_distance + 1
 
+        self._command_start_time = time.time()
         if distance < self._min_distance:
             self._robotMapPosition.add_obstacle_on_map(distance)
             command = Command(CommandType.ROTATE, self._angle_step)
@@ -41,7 +43,6 @@ class WorldCrawler(IWorldCrawler):
             self._controller.rotate(self._angle_step)
             self._robotMapPosition.move_robot_on_map(command)
         else:
-            self._command_start_time = time.time()
             command = Command(CommandType.MOVE, self._move_command_distance)
             self._commands.append(command)
             self._controller.move_forward(self._move_command_distance)
