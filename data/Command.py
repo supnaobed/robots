@@ -1,4 +1,4 @@
-from CommandType import CommandType
+from data.CommandType import CommandType
 
 
 class Command:

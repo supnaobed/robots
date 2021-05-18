@@ -9,8 +9,8 @@ from worldapi import IWorldCrawler
 
 
 class WorldCrawler(IWorldCrawler):
-    _move_command_distance = 1
-    _move_command_time = _move_command_distance * 1.5
+    _move_command_distance = 0.5
+    _move_command_time = _move_command_distance * 1.1
     _min_distance = 1
     _angle_step = 30
 

@@ -1,7 +1,7 @@
 from robomaster import robot
-from RobotAI import RobotAI
-from WorldCrawler import WorldCrawler
 
+from DefaultMap import DefaultMap
+from WorldCrawler import WorldCrawler
 from robot.components.controller.RobomasterController import RobomasterController
 from robot.components.vision.RobomasterIRDistanceProvider import RobomasterIRDistanceProvider
 from world.RobotMapPosition import RobotMapPosition
@@ -15,8 +15,7 @@ def setup_robot():
         ep_robot.robotic_arm,
         ep_robot.gripper
     )
-    # TODO inject IMap
-    map_position = RobotMapPosition()
+    map_position = RobotMapPosition(DefaultMap())
 
     crawler = WorldCrawler(map_position, controller)
     distance_provider = RobomasterIRDistanceProvider(crawler, ep_robot.sensor)

@@ -1,3 +1,4 @@
+from data.CommandType import CommandType
 from worldapi import IMap
 from worldapi import Point
 from data import Command
@@ -28,7 +29,7 @@ class RobotMapPosition:
         self.robotMap.add_point(get_point(distance, angle=self.robotAngle))
 
     def move_robot_on_map(self, command: Command):
-        if command.type == Command.CommandType.MOVE:
+        if command.commandType == CommandType.MOVE:
             self.update_map(get_point(command.value, self.robotAngle), angle=self.robotAngle)
-        if command.type == Command.CommandType.MOVE:
+        if command.commandType == CommandType.MOVE:
             self.update_map(self.robotPosition, angle=command.value)
