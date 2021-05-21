@@ -14,11 +14,11 @@ class DefaultMap(IMap):
 
     def add_point(self, point: Point):
         self.points.append(point)
-        self.draw()
+        # self.draw()
 
     def add_vector(self, point: Point):
         self.path.append(point)
-        self.draw()
+        # self.draw()
 
     def draw(self):
         fig = plt.figure()

@@ -18,9 +18,4 @@ class RobomasterIRDistanceProvider:
 
     def sub_data_handler(self, sub_info):
         print("sub_data_handler " + str(sub_info))
-        print("sensor adapter id1-port1 adc is {0}".format(self.adc))
-        io = self.ep_sensor_adaptor.get_io(id=1, port=1)
-        print("sensor adapter id1-port1 io is {0}".format(io))
-        duration = self.ep_sensor_adaptor.get_pulse_period(id=1, port=1)
-        print("sensor adapter id1-port1 duration is {0}ms".format(duration))
-        self.listener.on_update_distance(sub_info[0])
+        self.listener.on_update_distance(sub_info[0]/1000)
