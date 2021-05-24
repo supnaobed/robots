@@ -1,4 +1,6 @@
 from typing import List
+import numpy as np
+import time
 
 from matplotlib import pyplot as plt
 
@@ -6,41 +8,32 @@ from worldapi import IMap, Point
 
 
 class DefaultMap(IMap):
-    points: List[Point] = []
-    path: List[Point] = []
+
+    fig = plt.figure()
+    plt.axis([0, 100, 0, 100])
+    path = list()
 
     def get_world_points(self) -> List[Point]:
         pass
 
     def add_point(self, point: Point):
-        self.points.append(point)
-        # self.draw()
+        plt.scatter(point.x, point.y)
+        plt.pause(0.0001)
 
     def add_vector(self, point: Point):
         self.path.append(point)
-        # self.draw()
+        xs = [point.x for point in self.path]
+        ys = [point.y for point in self.path]
+        plt.plot(xs, ys, '.r-')
+        plt.pause(0.0001)
 
-    def draw(self):
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
 
-        x_points = list()
-        y_points = list()
-        for point in self.points:
-            x_points.append(point.x)
-            y_points.append(point.y)
-
-        ax.plot(x_points, y_points, 'b')
-
-        x_points_path = list()
-        y_points_path = list()
-        # for point in self.path:
-        #     x_points_path.append(point.x)
-        #     y_points_path.append(point.y)
-        #
-        # ax.plot(x_points_path, y_points_path, 'r')
-
-        ax.set_xlabel('x-points')
-        ax.set_ylabel('y-points')
-        fig.show()
-        plt.pause(3)
+if __name__ == '__main__':
+    map = DefaultMap()
+    for i in range(100):
+        time.sleep(1)
+        y = np.random.random() * 100
+        map.add_point(Point(i, y))
+        y2 = np.random.random() * 100
+        x = np.random.random() * 100
+        map.add_vector(Point(x, y2))
