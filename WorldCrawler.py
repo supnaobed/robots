@@ -1,3 +1,4 @@
+import random
 import time
 from typing import Optional, List
 
@@ -13,6 +14,7 @@ class WorldCrawler(IWorldCrawler):
     _move_command_time = _move_command_distance * 1.1
     _min_distance = 1
     _angle_step = 30
+    _angle_threshold = 15
 
     _commands: List[Command] = []
 
@@ -37,10 +39,11 @@ class WorldCrawler(IWorldCrawler):
 
         self._command_start_time = time.time()
         if distance < self._min_distance:
+            angle = random.randrange(self._angle_step - self._angle_threshold, self._angle_step - self._angle_threshold)
             self._robotMapPosition.add_obstacle_on_map(distance)
-            command = Command(CommandType.ROTATE, self._angle_step)
+            command = Command(CommandType.ROTATE, angle)
             self._commands.append(command)
-            self._controller.rotate(self._angle_step)
+            self._controller.rotate(angle)
             self._robotMapPosition.move_robot_on_map(command)
         else:
             command = Command(CommandType.MOVE, self._move_command_distance)
