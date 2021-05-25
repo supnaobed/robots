@@ -15,17 +15,18 @@ def setup_robot():
         ep_robot.robotic_arm,
         ep_robot.gripper
     )
-    map_position = RobotMapPosition(DefaultMap())
+    map = DefaultMap()
+    map_position = RobotMapPosition(map)
 
     crawler = WorldCrawler(map_position, controller)
     distance_provider = RobomasterIRDistanceProvider(crawler,
                                                      ep_robot.sensor,
                                                      ep_robot.sensor_adaptor)
+    map.run()
 
 
 if __name__ == '__main__':
     setup_robot()
-
 
 # import robomaster
 # from robomaster import robot
