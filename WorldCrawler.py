@@ -15,6 +15,7 @@ class WorldCrawler(IWorldCrawler):
     _min_distance = 1
     _angle_step = 30
     _angle_threshold = 15
+    _angle_sign = 1
 
     _commands: List[Command] = []
 
@@ -39,7 +40,7 @@ class WorldCrawler(IWorldCrawler):
 
         self._command_start_time = time.time()
         if distance < self._min_distance:
-            angle = random.randrange(self._angle_step - self._angle_threshold, self._angle_step - self._angle_threshold)
+            angle = self._angle_sign * random.randrange(self._angle_step - self._angle_threshold, self._angle_step - self._angle_threshold)
             self._robotMapPosition.add_obstacle_on_map(distance)
             command = Command(CommandType.ROTATE, angle)
             self._commands.append(command)
@@ -47,6 +48,9 @@ class WorldCrawler(IWorldCrawler):
             self._robotMapPosition.move_robot_on_map(command)
         else:
             command = Command(CommandType.MOVE, self._move_command_distance)
+            if len(self._commands) > 0:
+                if self._commands[len(self._commands) - 1].commandType == CommandType.ROTATE:
+                    self._angle_sign = - self._angle_sign
             self._commands.append(command)
             self._controller.move_forward(self._move_command_distance)
             self._robotMapPosition.move_robot_on_map(command)
