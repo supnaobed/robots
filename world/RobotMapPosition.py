@@ -26,10 +26,16 @@ class RobotMapPosition:
         self.robotMap.add_vector(point)
 
     def add_obstacle_on_map(self, distance: float):
-        self.robotMap.add_point(get_point(distance, angle=self.robotAngle))
+        point = get_point(distance, angle=self.robotAngle)
+        point.x = point.x + self.robotPosition.x
+        point.y = point.y + self.robotPosition.y
+        self.robotMap.add_point(point)
 
     def move_robot_on_map(self, command: Command):
         if command.commandType == CommandType.MOVE:
-            self.update_map(get_point(command.value, self.robotAngle), angle=self.robotAngle)
-        if command.commandType == CommandType.MOVE:
+            old_point = self.robotPosition
+            delta = get_point(command.value, self.robotAngle)
+            new_point = Point(old_point.x + delta.x, old_point.y + delta.y)
+            self.update_map(new_point, angle=self.robotAngle)
+        if command.commandType == CommandType.ROTATE:
             self.update_map(self.robotPosition, angle=command.value)
