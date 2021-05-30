@@ -24,12 +24,13 @@ class DefaultMap(IMap):
 
     def run(self):
         while True:
+            plt.clf()
             for point in self.points:
                 plt.scatter(point.x, point.y)
             xs = [point.x for point in self.path]
             ys = [point.y for point in self.path]
             plt.plot(xs, ys, '.r-')
-            plt.pause(1)
+            plt.pause(0.001)
 
 
 if __name__ == '__main__':

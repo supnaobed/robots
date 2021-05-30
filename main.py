@@ -1,4 +1,7 @@
 from robomaster import robot
+from data.Command import Command
+from data.CommandType import CommandType
+import math
 
 from DefaultMap import DefaultMap
 from WorldCrawler import WorldCrawler
@@ -17,7 +20,6 @@ def setup_robot():
     )
     map = DefaultMap()
     map_position = RobotMapPosition(map)
-
     crawler = WorldCrawler(map_position, controller)
     distance_provider = RobomasterIRDistanceProvider(crawler,
                                                      ep_robot.sensor,
@@ -27,6 +29,12 @@ def setup_robot():
 
 if __name__ == '__main__':
     setup_robot()
+    # map = DefaultMap()
+    # map_position = RobotMapPosition(map)
+    # map_position.move_robot_on_map(Command(CommandType.MOVE, 1.0))
+    # map_position.move_robot_on_map(Command(CommandType.ROTATE, 180.0))
+    # map_position.move_robot_on_map(Command(CommandType.MOVE, 1.0))
+
 
 # import robomaster
 # from robomaster import robot

@@ -6,8 +6,8 @@ import math
 
 
 def get_point(distance: float, angle: float):
-    x = math.cos(angle) * distance
-    y = math.sin(angle) * distance
+    x = math.cos(math.radians(angle)) * distance
+    y = math.sin(math.radians(angle)) * distance
     return Point(x, y)
 
 
@@ -24,6 +24,7 @@ class RobotMapPosition:
         self.robotPosition = point
         self.robotAngle = angle
         self.robotMap.add_vector(point)
+        # print("point: " + str(point.x) + " " + str(point.y))
 
     def add_obstacle_on_map(self, distance: float):
         point = get_point(distance, angle=self.robotAngle)
@@ -38,4 +39,4 @@ class RobotMapPosition:
             new_point = Point(old_point.x + delta.x, old_point.y + delta.y)
             self.update_map(new_point, angle=self.robotAngle)
         if command.commandType == CommandType.ROTATE:
-            self.update_map(self.robotPosition, angle=command.value)
+            self.robotAngle = command.value

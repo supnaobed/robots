@@ -96,7 +96,7 @@ class RobomasterController(IRobotController):
         timeout = 0.95 / 90 * abs(angle)
         self.ep_chassis.drive_speed(x=0, y=0, z=100 * sign(angle), timeout=timeout)
         # time.sleep(abs(timeout))
-        print("rotate" + str(angle))
+        print("rotate " + str(angle))
 
     def open_gripper(self):
         self.ep_gripper.open()
